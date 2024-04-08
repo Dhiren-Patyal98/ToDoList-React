@@ -1,6 +1,19 @@
 import style from './cssModule/TodoCss.module.css'
+import React, { useState } from "react";
 
-export default function AddTodo() {
+
+export default function AddTodo(props) {
+
+  const [title,settitle] = useState('');
+  const [desc,setdesc] =useState('');
+  const [remark,setremark]= useState('');
+  
+  const tododata = {
+    title:title,
+    desc:desc,
+    remark:remark,
+
+  }
   return (
     <div className= {`${style.m}`}>
         <h3 className={style.f}>Add ToDo</h3>
@@ -15,6 +28,12 @@ export default function AddTodo() {
                     className='form-control'
                     id='title'
                     placeholder='Title'
+                    value={title}
+                    onChange={(event)=>
+                    {
+                      settitle(event.target.value);
+
+                    }}
                     >
 
                     </input>
@@ -25,6 +44,12 @@ export default function AddTodo() {
                     className='form-control'
                     id='description'
                     placeholder='Description'
+                    value={desc}
+                    onChange={(event)=>
+                      {
+                        setdesc(event.target.value);
+  
+                      }}
                    >
 
                     </input>
@@ -35,13 +60,25 @@ export default function AddTodo() {
                     className='form-control'
                     id='budget'
                     placeholder='Budget'
+                    value={remark}
+                    onChange={(event)=>
+                      {
+                        setremark(event.target.value);
+  
+                      }}
                   >
 
                     </input>
                 </div>
             </div>
             <div className="d-grid gap-2 col-3   mx-auto mt-4">
-  <button  className="btn btn-outline-success" type="button">Add Todo</button>
+  <button onClick ={()=>
+  {props.f(tododata)
+    settitle("");
+    setdesc("");
+    setremark("");
+  }
+} className="btn btn-outline-success" type="button">Add Todo</button>
  
 </div>
 
